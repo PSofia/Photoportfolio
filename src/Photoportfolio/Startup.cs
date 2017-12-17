@@ -11,6 +11,7 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Newtonsoft.Json.Serialization;
+using Photoportfolio.Infrastructure.Mapping;
 
 namespace Photoportfolio
 {

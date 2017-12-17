@@ -7,8 +7,8 @@
 -debug:portable
 -nostdlib
 -nologo
-"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\obj\Debug\netcoreapp1.1\dotnet-compile.assemblyinfo.cs"
--out:"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\bin\Debug\netcoreapp1.1\Photoportfolio.dll"
+"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\bin\src\Photoportfolio\obj\Debug\netcoreapp1.1\dotnet-compile.assemblyinfo.cs"
+-out:"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\bin\src\Photoportfolio\bin\Debug\netcoreapp1.1\Photoportfolio.dll"
 -r:"C:\Users\Alexander\.nuget\packages\AutoMapper\4.1.1\lib\dotnet\AutoMapper.dll"
 -r:"C:\Users\Alexander\.nuget\packages\AutoMapper.Data\1.0.0-beta1\lib\dotnet\AutoMapper.Data.dll"
 -r:"C:\Users\Alexander\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll"
@@ -204,7 +204,7 @@
 -r:"C:\Users\Alexander\.nuget\packages\System.Threading.Timer\4.3.0\ref\netstandard1.2\System.Threading.Timer.dll"
 -r:"C:\Users\Alexander\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll"
 -r:"C:\Users\Alexander\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll"
--resource:"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\obj\Debug\netcoreapp1.1\Photoportfoliodotnet-compile.deps.json",Photoportfolio.deps.json
+-resource:"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\bin\src\Photoportfolio\obj\Debug\netcoreapp1.1\Photoportfoliodotnet-compile.deps.json",Photoportfolio.deps.json
 "C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Startup.cs"
 "C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Entities\Album.cs"
 "C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Entities\Error.cs"

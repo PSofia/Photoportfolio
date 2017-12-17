@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Photoportfolio.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Photoportfolio.Infrastructure.Repositories.Abstract
 {

@@ -1,9 +1,6 @@
 ﻿using Photoportfolio.Entities;
 using Photoportfolio.Infrastructure.Repositories.Abstract;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Photoportfolio.Infrastructure.Repositories
 {

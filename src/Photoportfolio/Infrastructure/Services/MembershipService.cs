@@ -18,7 +18,7 @@ namespace Photoportfolio.Infrastructure.Services
         private readonly IEncryptionService encryptionService;
         #endregion
         public MembershipService(IUserRepository userRepository, IRoleRepository roleRepository,
-            IUserRoleRepository userRoleRepository, IEncryptionService encryptionService)
+        IUserRoleRepository userRoleRepository, IEncryptionService encryptionService)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
@@ -51,7 +51,9 @@ namespace Photoportfolio.Infrastructure.Services
             var existingUser = userRepository.GetSingleByUsername(username);
 
             if (existingUser != null)
+            {
                 throw new Exception("Username is already in use");
+            }
 
             var passwordSalt = encryptionService.CreateSalt();
 
@@ -70,8 +72,12 @@ namespace Photoportfolio.Infrastructure.Services
             userRepository.Commit();
 
             if (roles != null || roles.Length > 0)
+            {
                 foreach (var role in roles)
+                {
                     addUserToRole(user, role);
+                }
+            }
 
             userRepository.Commit();
 
@@ -85,23 +91,26 @@ namespace Photoportfolio.Infrastructure.Services
 
         public List<Role> GetUserRoles(string username)
         {
-            List<Role> result = new List<Role>();
+            List<Role> _result = new List<Role>();
 
             var existingUser = userRepository.GetSingleByUsername(username);
 
             if (existingUser != null)
+            {
                 foreach (var userRole in existingUser.UserRoles)
-                    result.Add(userRole.Role);
+                {
+                    _result.Add(userRole.Role);
+                }
             }
 
-            return result.Distinct().ToList();
+            return _result.Distinct().ToList();
         }
         #endregion
 
         #region Helper methods
         private void addUserToRole(User user, int roleId)
         {
-            var role = _roleRepository.GetSingle(roleId);
+            var role = roleRepository.GetSingle(roleId);
             if (role == null)
                 throw new Exception("Role doesn't exist.");
 
@@ -110,14 +119,14 @@ namespace Photoportfolio.Infrastructure.Services
                 RoleId = role.Id,
                 UserId = user.Id
             };
-            _userRoleRepository.Add(userRole);
+            userRoleRepository.Add(userRole);
 
-            _userRepository.Commit();
+            userRepository.Commit();
         }
 
         private bool isPasswordValid(User user, string password)
         {
-            return string.Equals(_encryptionService.EncryptPassword(password, user.Salt), user.HashedPassword);
+            return string.Equals(encryptionService.EncryptPassword(password, user.Salt), user.HashedPassword);
         }
 
         private bool isUserValid(User user, string password)
