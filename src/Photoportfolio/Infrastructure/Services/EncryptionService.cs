@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Photoportfolio.Infrastructure.Services
 {
-    public class EncryptionService : IEncryptionService
+    public class EncryptionService : Abstract.IEncryptionService
     {
         public string CreateSalt()
         {
