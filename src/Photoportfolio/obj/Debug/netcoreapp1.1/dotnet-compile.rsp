@@ -211,6 +211,7 @@
 --reference:C:\Users\Alexander\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
 --resource:"C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\obj\Debug\netcoreapp1.1\Photoportfoliodotnet-compile.deps.json",Photoportfolio.deps.json
 C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Startup.cs
+C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Controllers\HomeController.cs
 C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Entities\Album.cs
 C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Entities\Error.cs
 C:\Users\Alexander\documents\visual studio 2015\Projects\Photoportfolio\src\Photoportfolio\Entities\IEnityBase.cs
