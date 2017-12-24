@@ -34,4 +34,4 @@ var Paginated = /** @class */ (function () {
     return Paginated;
 }());
 exports.Paginated = Paginated;
-//# sourceMappingURL=Paginated.js.map
+//# sourceMappingURL=paginated.js.map
