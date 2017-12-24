@@ -1,5 +1,6 @@
 "use strict";
-var Registration = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var Registration = /** @class */ (function () {
     function Registration(username, password, email) {
         this.Username = username;
         this.Password = password;

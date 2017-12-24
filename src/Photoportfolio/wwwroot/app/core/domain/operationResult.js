@@ -1,5 +1,6 @@
 "use strict";
-var OperationResult = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var OperationResult = /** @class */ (function () {
     function OperationResult(succeeded, message) {
         this.Succeeded = succeeded;
         this.Message = message;

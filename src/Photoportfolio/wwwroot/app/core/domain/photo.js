@@ -1,5 +1,6 @@
 "use strict";
-var Photo = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var Photo = /** @class */ (function () {
     function Photo(id, title, uri, albumId, albumTitle, dateUploaded) {
         this.Id = id;
         this.Title = title;

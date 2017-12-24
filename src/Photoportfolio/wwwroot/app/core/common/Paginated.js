@@ -1,5 +1,6 @@
 "use strict";
-var Paginated = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var Paginated = /** @class */ (function () {
     function Paginated(page, pagesCount, totalCount) {
         this._page = 0;
         this._pagesCount = 0;
