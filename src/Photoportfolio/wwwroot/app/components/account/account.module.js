@@ -41,4 +41,4 @@ var AccountModule = /** @class */ (function () {
     return AccountModule;
 }());
 exports.AccountModule = AccountModule;
-//# sourceMappingURL=account-module.js.map
+//# sourceMappingURL=account.module.js.map

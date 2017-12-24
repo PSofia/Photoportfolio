@@ -28,8 +28,8 @@ namespace Photoportfolio.Controllers
             _loggingRepository = _errorRepository;
         }
 
-
-        [HttpPost("authenticate")]
+        [Route("login")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginViewModel user)
         {
             IActionResult _result = new ObjectResult(false);

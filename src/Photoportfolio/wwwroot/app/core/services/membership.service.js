@@ -16,7 +16,7 @@ var MembershipService = /** @class */ (function () {
     function MembershipService(accountService) {
         this.accountService = accountService;
         this._accountRegisterAPI = 'api/account/register/';
-        this._accountLoginAPI = 'api/account/authenticate/';
+        this._accountLoginAPI = 'api/account/login/';
         this._accountLogoutAPI = 'api/account/logout/';
     }
     MembershipService.prototype.register = function (newUser) {
@@ -25,6 +25,7 @@ var MembershipService = /** @class */ (function () {
     };
     MembershipService.prototype.login = function (creds) {
         this.accountService.set(this._accountLoginAPI);
+        debugger;
         return this.accountService.post(JSON.stringify(creds));
     };
     MembershipService.prototype.logout = function () {

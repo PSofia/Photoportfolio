@@ -17,16 +17,16 @@ namespace Photoportfolio
 {
     public class Startup
     {
-        private static string applicationPath = string.Empty;
-        private static string contentRootPath = string.Empty;
+        private static string _applicationPath = string.Empty;
+        private static string _contentRootPath = string.Empty;
         public Startup(IHostingEnvironment env)
         {
-            applicationPath = env.WebRootPath;
-            contentRootPath = env.ContentRootPath;
+            _applicationPath = env.WebRootPath;
+            _contentRootPath = env.ContentRootPath;
             // Setup configuration sources.
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(contentRootPath)
+                .SetBasePath(_contentRootPath)
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -36,13 +36,11 @@ namespace Photoportfolio
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
             }
-
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; set; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -72,7 +70,7 @@ namespace Photoportfolio
 
             // Services
             services.AddScoped<IMembershipService, MembershipService>();
-            services.AddScoped<Infrastructure.Services.Abstract.IEncryptionService, EncryptionService>();
+            services.AddScoped<IEncryptionService, EncryptionService>();
 
             services.AddAuthentication();
 
@@ -89,15 +87,15 @@ namespace Photoportfolio
 
             // Add MVC services to the services container.
             services.AddMvc()
-                .AddJsonOptions(opt =>
+            .AddJsonOptions(opt =>
+            {
+                var resolver = opt.SerializerSettings.ContractResolver;
+                if (resolver != null)
                 {
-                    var resolver = opt.SerializerSettings.ContractResolver;
-                    if (resolver != null)
-                    {
-                        var res = resolver as DefaultContractResolver;
-                        res.NamingStrategy = null;
-                    }
-                });
+                    var res = resolver as DefaultContractResolver;
+                    res.NamingStrategy = null;
+                }
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,6 +112,9 @@ namespace Photoportfolio
                 AutomaticChallenge = true
             });
 
+            // Custom authentication middleware
+            //app.UseMiddleware<AuthMiddleware>();
+
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
             {
@@ -121,9 +122,10 @@ namespace Photoportfolio
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
+               //routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
-            DbInitializer.Initialize(app.ApplicationServices, applicationPath);
+            DbInitializer.Initialize(app.ApplicationServices, _applicationPath);
         }
 
         // Entry point for the application.

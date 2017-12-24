@@ -27,6 +27,7 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         var _authenticationResult = new operationResult_1.OperationResult(false, '');
+        debugger;
         this.membershipService.login(this._user)
             .subscribe(function (res) {
             _authenticationResult.Succeeded = res.Succeeded;

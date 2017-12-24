@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     login(): void {
         var _authenticationResult: OperationResult = new OperationResult(false, '');
-
+        debugger;
         this.membershipService.login(this._user)
             .subscribe(res => {
                 _authenticationResult.Succeeded = res.Succeeded;
