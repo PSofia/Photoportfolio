@@ -9,4 +9,4 @@ var Registration = /** @class */ (function () {
     return Registration;
 }());
 exports.Registration = Registration;
-//# sourceMappingURL=Registration.js.map
+//# sourceMappingURL=registration.js.map
