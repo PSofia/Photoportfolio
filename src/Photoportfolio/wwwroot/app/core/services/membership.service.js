@@ -25,7 +25,6 @@ var MembershipService = /** @class */ (function () {
     };
     MembershipService.prototype.login = function (creds) {
         this.accountService.set(this._accountLoginAPI);
-        debugger;
         return this.accountService.post(JSON.stringify(creds));
     };
     MembershipService.prototype.logout = function () {

@@ -13,7 +13,7 @@ namespace Photoportfolio.Infrastructure.Repositories
     public class EntityBaseRepository<T> : IEntityBaseRepository<T>
         where T : class, IEntityBase, new()
     {
-        private readonly PhotoPortfolioDbContext context;
+        protected readonly PhotoPortfolioDbContext context;
 
         public EntityBaseRepository(PhotoPortfolioDbContext context)
         {

@@ -22,17 +22,20 @@ export class LoginComponent implements OnInit {
 
     login(): void {
         var _authenticationResult: OperationResult = new OperationResult(false, '');
-        debugger;
+        var _userId: string;
+         
         this.membershipService.login(this._user)
             .subscribe(res => {
                 _authenticationResult.Succeeded = res.Succeeded;
                 _authenticationResult.Message = res.Message;
+                _userId = res.UserId.toString();
             },
             error => console.error('Error: ' + error),
             () => {
                 if (_authenticationResult.Succeeded) {
                     this.notificationService.printSuccessMessage('Welcome back ' + this._user.Username + '!');
                     localStorage.setItem('user', JSON.stringify(this._user));
+                    localStorage.setItem('userId', _userId);
                     this.router.navigate(['home']);
                 }
                 else {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Photoportfolio.Entities
 {
@@ -11,6 +9,7 @@ namespace Photoportfolio.Entities
         {
             UserRoles = new List<UserRole>();
         }
+
         public int Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
@@ -19,6 +18,10 @@ namespace Photoportfolio.Entities
         public bool IsLocked { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public virtual ICollection<Album> Albums { get; set; }
+
         public virtual ICollection<UserRole> UserRoles { get; set; }
+
+        public virtual ICollection<UserFeedback> Feedbacks { get; set; }
     }
 }

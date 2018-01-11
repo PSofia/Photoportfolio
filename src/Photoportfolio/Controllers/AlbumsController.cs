@@ -18,6 +18,7 @@ namespace Photoportfolio.Controllers
         private readonly IAuthorizationService _authorizationService;
         IAlbumRepository _albumRepository;
         ILoggingRepository _loggingRepository;
+
         public AlbumsController(IAuthorizationService authorizationService,
                                 IAlbumRepository albumRepository,
                                 ILoggingRepository loggingRepository)

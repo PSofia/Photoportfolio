@@ -28,6 +28,8 @@ var PhotosComponent = /** @class */ (function (_super) {
         var _this = _super.call(this, 0, 0, 0) || this;
         _this.photosService = photosService;
         _this._photosAPI = 'api/photos/';
+        _this._photosVoteApi = 'api/photos/vote';
+        _this.totalStars = 5;
         return _this;
     }
     PhotosComponent.prototype.ngOnInit = function () {
@@ -45,6 +47,28 @@ var PhotosComponent = /** @class */ (function (_super) {
             self._totalCount = data.TotalCount;
         }, function (error) { return console.error('Error: ' + error); });
     };
+    PhotosComponent.prototype.onStarMouseMove = function (eventData, photo) {
+        var domRect = eventData.currentTarget.getBoundingClientRect();
+        var startX = domRect.left;
+        var currentX = eventData.clientX;
+        var deltaWidth = currentX - startX;
+        var totalWidth = domRect.width;
+        photo.RatingWidthPersentage = (deltaWidth * 100) / totalWidth;
+    };
+    PhotosComponent.prototype.onStarMouseLeave = function (photo) {
+        photo.RatingWidthPersentage = (photo.Rating * 100) / this.totalStars;
+    };
+    PhotosComponent.prototype.onStarClick = function (photo) {
+        var vote = Math.round((photo.RatingWidthPersentage / 100) * this.totalStars * 10) / 10;
+        var photoId = photo.Id;
+        var userId = localStorage.getItem('userId');
+        var voteData = new VoteData(+userId, +photoId, vote);
+        this.photosService.set(this._photosVoteApi);
+        this.photosService.post(JSON.stringify(voteData))
+            .subscribe(function (res) {
+            var data = res.json();
+        });
+    };
     PhotosComponent.prototype.search = function (i) {
         _super.prototype.search.call(this, i);
         this.getPhotos();
@@ -60,4 +84,13 @@ var PhotosComponent = /** @class */ (function (_super) {
     return PhotosComponent;
 }(paginated_1.Paginated));
 exports.PhotosComponent = PhotosComponent;
+var VoteData = /** @class */ (function () {
+    function VoteData(userId, photoId, vote) {
+        this.userId = userId;
+        this.photoId = photoId;
+        this.vote = vote;
+    }
+    return VoteData;
+}());
+exports.VoteData = VoteData;
 //# sourceMappingURL=photos.component.js.map

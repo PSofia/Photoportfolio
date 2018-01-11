@@ -11,6 +11,8 @@ namespace Photoportfolio.Infrastructure.Repositories.Abstract
 
     public interface IRoleRepository : IEntityBaseRepository<Role> { }
 
+    public interface IFeedbackRepository : IEntityBaseRepository<UserFeedback> { }
+
     public interface IUserRepository : IEntityBaseRepository<User>
     {
         User GetSingleByUsername(string username);

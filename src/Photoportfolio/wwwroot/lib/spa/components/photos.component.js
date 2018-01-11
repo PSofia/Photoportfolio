@@ -22,12 +22,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var paginated_1 = require("../core/common/paginated");
 var data_service_1 = require("../core/services/data.service");
+var notification_service_1 = require("../core/services/notification.service");
 var PhotosComponent = (function (_super) {
     __extends(PhotosComponent, _super);
-    function PhotosComponent(photosService) {
+    function PhotosComponent(photosService, notificationService) {
         var _this = _super.call(this, 0, 0, 0) || this;
         _this.photosService = photosService;
+        _this.notificationService = notificationService;
         _this._photosAPI = 'api/photos/';
+        _this._photosVoteApi = 'api/photos/vote';
+        _this.totalStars = 5;
         return _this;
     }
     PhotosComponent.prototype.ngOnInit = function () {
@@ -39,11 +43,39 @@ var PhotosComponent = (function (_super) {
         self.photosService.get(self._page)
             .subscribe(function (res) {
             var data = res.json();
+            data.Items.forEach(function (p) { return p.RatingWidthPersentage = (p.Rating * 100) / self.totalStars; });
             self._photos = data.Items;
             self._page = data.Page;
             self._pagesCount = data.TotalPages;
             self._totalCount = data.TotalCount;
         }, function (error) { return console.error('Error: ' + error); });
+    };
+    PhotosComponent.prototype.onStarMouseMove = function (eventData, photo) {
+        var domRect = eventData.currentTarget.getBoundingClientRect();
+        var startX = domRect.left;
+        var currentX = eventData.clientX;
+        var deltaWidth = currentX - startX;
+        var totalWidth = domRect.width;
+        photo.RatingWidthPersentage = (deltaWidth * 100) / totalWidth;
+    };
+    PhotosComponent.prototype.onStarMouseLeave = function (photo) {
+        photo.RatingWidthPersentage = (photo.Rating * 100) / this.totalStars;
+    };
+    PhotosComponent.prototype.onStarClick = function (photo) {
+        var _this = this;
+        var vote = Math.round((photo.RatingWidthPersentage / 100) * this.totalStars * 10) / 10;
+        var photoId = photo.Id;
+        var userId = localStorage.getItem('userId');
+        var voteData = new VoteData(+userId, +photoId, vote);
+        this.photosService.set(this._photosVoteApi);
+        this.photosService.post(JSON.stringify(voteData))
+            .subscribe(function (res) {
+            var data = res;
+            if (data.Succeeded)
+                _this.notificationService.printSuccessMessage(data.Message);
+            else
+                _this.notificationService.printErrorMessage(data.Message);
+        });
     };
     PhotosComponent.prototype.search = function (i) {
         _super.prototype.search.call(this, i);
@@ -55,8 +87,17 @@ var PhotosComponent = (function (_super) {
             selector: 'photos',
             templateUrl: './app/components/photos.component.html'
         }),
-        __metadata("design:paramtypes", [data_service_1.DataService])
+        __metadata("design:paramtypes", [data_service_1.DataService, notification_service_1.NotificationService])
     ], PhotosComponent);
     return PhotosComponent;
 }(paginated_1.Paginated));
 exports.PhotosComponent = PhotosComponent;
+var VoteData = (function () {
+    function VoteData(userId, photoId, vote) {
+        this.userId = userId;
+        this.photoId = photoId;
+        this.vote = vote;
+    }
+    return VoteData;
+}());
+exports.VoteData = VoteData;

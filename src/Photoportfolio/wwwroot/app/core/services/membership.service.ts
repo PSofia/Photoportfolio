@@ -22,7 +22,7 @@ export class MembershipService {
 
     login(creds: User) {
         this.accountService.set(this._accountLoginAPI);
-        debugger;
+
         return this.accountService.post(JSON.stringify(creds));
     }
 

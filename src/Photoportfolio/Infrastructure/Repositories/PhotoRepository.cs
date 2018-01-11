@@ -7,6 +7,7 @@ namespace Photoportfolio.Infrastructure.Repositories
     {
         public PhotoRepository(PhotoPortfolioDbContext context)
             : base(context)
-        { }
+        {
+        }
     }
 }

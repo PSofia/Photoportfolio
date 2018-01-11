@@ -13,8 +13,8 @@ namespace Photoportfolio.Infrastructure
         {
             context = (PhotoPortfolioDbContext)serviceProvider.GetService(typeof(PhotoPortfolioDbContext));
 
-            InitializePhotoAlbums(imagesPath);
             InitializeUserRoles();
+            InitializePhotoAlbums(imagesPath);
         }
 
         private static void InitializePhotoAlbums(string imagesPath)
@@ -28,28 +28,32 @@ namespace Photoportfolio.Infrastructure
                     {
                         DateCreated = DateTime.Now,
                         Title = "Album 1",
-                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        User = context.Users.First()
                     }).Entity;
                 var album2 = context.Albums.Add(
                     new Album
                     {
                         DateCreated = DateTime.Now,
                         Title = "Album 2",
-                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        User = context.Users.First()
                     }).Entity;
                 var album3 = context.Albums.Add(
                     new Album
                     {
                         DateCreated = DateTime.Now,
                         Title = "Album 3",
-                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        User = context.Users.First()
                     }).Entity;
                 var album4 = context.Albums.Add(
                     new Album
                     {
                         DateCreated = DateTime.Now,
                         Title = "Album 4",
-                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        User = context.Users.First()
                     }).Entity;
 
                 albums.Add(album1);
@@ -96,6 +100,7 @@ namespace Photoportfolio.Infrastructure
                 context.SaveChanges();
             }
 
+            // password: photogallery
             if (!context.Users.Any())
             {
                 context.Users.Add(new User()

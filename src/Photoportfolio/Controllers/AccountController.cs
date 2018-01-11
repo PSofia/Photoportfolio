@@ -54,9 +54,10 @@ namespace Photoportfolio.Controllers
                         new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties { IsPersistent = user.RememberMe });
 
 
-                    _authenticationResult = new GenericResult()
+                    _authenticationResult = new AuthResult()
                     {
                         Succeeded = true,
+                        UserId = _userRepository.GetSingleByUsername(user.Username).Id,
                         Message = "Authentication succeeded"
                     };
                 }

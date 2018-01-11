@@ -27,15 +27,17 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         var _authenticationResult = new operationResult_1.OperationResult(false, '');
-        debugger;
+        var _userId;
         this.membershipService.login(this._user)
             .subscribe(function (res) {
             _authenticationResult.Succeeded = res.Succeeded;
             _authenticationResult.Message = res.Message;
+            _userId = res.UserId.toString();
         }, function (error) { return console.error('Error: ' + error); }, function () {
             if (_authenticationResult.Succeeded) {
                 _this.notificationService.printSuccessMessage('Welcome back ' + _this._user.Username + '!');
                 localStorage.setItem('user', JSON.stringify(_this._user));
+                localStorage.setItem('userId', _userId);
                 _this.router.navigate(['home']);
             }
             else {

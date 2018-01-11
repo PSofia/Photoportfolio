@@ -14,6 +14,8 @@ namespace Photoportfolio.Infrastructure
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Error> Errors { get; set; }
 
+        public DbSet<UserFeedback> Feedbacks { get; set; }
+
         public PhotoPortfolioDbContext(DbContextOptions options)
             : base(options)
         {
@@ -31,8 +33,11 @@ namespace Photoportfolio.Infrastructure
             modelBuilder.Entity<Photo>().Property(p => p.AlbumId).IsRequired();
 
             // Album
+            modelBuilder.Entity<Album>().Property(a => a.UserId).IsRequired();
             modelBuilder.Entity<Album>().Property(a => a.Title).HasMaxLength(100);
             modelBuilder.Entity<Album>().Property(a => a.Description).HasMaxLength(500);
+            modelBuilder.Entity<Album>().HasOne(a => a.User).WithMany(u => u.Albums).IsRequired()
+                .OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
             modelBuilder.Entity<Album>().HasMany(a => a.Photos).WithOne(p => p.Album);
 
             // User
@@ -47,6 +52,10 @@ namespace Photoportfolio.Infrastructure
 
             // Role
             modelBuilder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(50);
+
+            // Feedbacks
+            modelBuilder.Entity<UserFeedback>().Property(f => f.PhotoId).IsRequired();
+            modelBuilder.Entity<UserFeedback>().Property(f => f.UserId).IsRequired();
         }
     }
 }

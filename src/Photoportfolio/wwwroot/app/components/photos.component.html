@@ -19,6 +19,17 @@
             <a class="fancybox" rel="gallery" href="{{image.Uri}}">
                 <img src="{{image.Uri}}" alt="{{image.Title}}" class="img img-responsive full-width thumbnail" />
             </a>
+            <div class="row">
+                <div class="col-md-7">Author: {{image.Author}}</div>
+                <div class="col-md-5 text-right">
+                    <span>{{image.Rating}}</span>
+                    <div class="stars-outer" (mousemove)="onStarMouseMove($event, image)" (mouseleave)="onStarMouseLeave(image)"
+                         (click)="onStarClick(image)">
+                        <div class="stars-inner"
+                             [style.width.%]="image.RatingWidthPersentage"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

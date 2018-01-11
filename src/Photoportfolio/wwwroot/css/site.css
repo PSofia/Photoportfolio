@@ -137,6 +137,30 @@ footer {
             box-shadow: #31708f 1.5em 0 0 0, #31708f 1.1em 1.1em 0 0, #31708f 0 1.5em 0 0, #31708f -1.1em 1.1em 0 0, #31708f -1.5em 0 0 0, #31708f -1.1em -1.1em 0 0, #31708f 0 -1.5em 0 0, #31708f 1.1em -1.1em 0 0;
         }
 
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  cursor: pointer;
+}
+ 
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+ 
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+ 
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
+}
+
 /* Animation */
 
 @-webkit-keyframes spinner {

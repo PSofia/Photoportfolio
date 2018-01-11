@@ -29,7 +29,11 @@ namespace Photoportfolio.Migrations
                     b.Property<string>("Title")
                         .HasAnnotation("MaxLength", 100);
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Album");
                 });
@@ -58,6 +62,8 @@ namespace Photoportfolio.Migrations
                     b.Property<int>("AlbumId");
 
                     b.Property<DateTime>("DateUploaded");
+
+                    b.Property<float>("Rating");
 
                     b.Property<string>("Title")
                         .HasAnnotation("MaxLength", 100);
@@ -115,6 +121,26 @@ namespace Photoportfolio.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Photoportfolio.Entities.UserFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<float>("Mark");
+
+                    b.Property<int>("PhotoId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFeedback");
+                });
+
             modelBuilder.Entity("Photoportfolio.Entities.UserRole", b =>
                 {
                     b.Property<int>("Id")
@@ -133,11 +159,31 @@ namespace Photoportfolio.Migrations
                     b.ToTable("UserRole");
                 });
 
+            modelBuilder.Entity("Photoportfolio.Entities.Album", b =>
+                {
+                    b.HasOne("Photoportfolio.Entities.User", "User")
+                        .WithMany("Albums")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Photoportfolio.Entities.Photo", b =>
                 {
                     b.HasOne("Photoportfolio.Entities.Album", "Album")
                         .WithMany("Photos")
                         .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Photoportfolio.Entities.UserFeedback", b =>
+                {
+                    b.HasOne("Photoportfolio.Entities.Photo", "Photo")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("PhotoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Photoportfolio.Entities.User", "User")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -67,6 +67,7 @@ namespace Photoportfolio
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ILoggingRepository, LoggingRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 
             // Services
             services.AddScoped<IMembershipService, MembershipService>();
